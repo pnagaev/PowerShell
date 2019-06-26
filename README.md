@@ -1,7 +1,7 @@
 # PowerShell
 Powershell scripts
 
-#compare-objectz.ps1
+Compare-Objectz.ps1
 
 С помощью этого скрипта можно сравнивать два объекта PowerShell одного типа и выводить на экран только различающиеся свойства.
 
