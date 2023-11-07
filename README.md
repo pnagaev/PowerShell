@@ -1,3 +1,5 @@
+[Справочник по командам PowerShell](https://github.com/pnagaev/PowerShell/wiki)
+
 # PowerShell
 Powershell scripts
 
