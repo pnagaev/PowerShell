@@ -25,3 +25,12 @@ get-service WSearch | Out-Clean
 ```
 * Отсортирует свойства по названию
 * Не выведет строки без значений(:и пусто) 
+
+## Out-Form.ps1
+Функция выводит свойства объекта в Out-GridView для удобного просмотра.
+Например,
+```powershell
+get-service WSearch | out-form
+```
+[!TIP]
+Обе функции удобно добавить в профиль PowerShell
