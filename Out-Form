@@ -1,0 +1,59 @@
+<#
+Функция выводит свойства объекта в Out-GridView для удобного просмотра.
+Например,
+
+get-service WSearch | out-form
+
+#>
+function Out-Form {
+    [CmdletBinding()]
+    param(
+        [Parameter(ValueFromPipeline = $true)]
+        $InputObject
+    )
+    
+    begin {
+        $count = 0
+        $items = New-Object System.Collections.Generic.List[Object]
+    }
+
+    process {
+        if ($null -ne $InputObject) {
+            $items.Add($InputObject)
+            $count++
+        }
+    }
+
+    end {
+        if ($count -gt 1) {
+            Write-Warning "Out-Form: Ожидался 1 объект, получено $count. Используйте 'Select-Object -First 1' или фильтрацию."
+            return
+        }
+        elseif ($count -eq 0) {
+            Write-Warning "Out-Form: Входные данные пусты."
+            return
+        }
+
+        $item = $items[0]
+
+        # 1. Обработка данных
+        if ($item -is [Microsoft.PowerShell.Commands.MemberDefinition]) {
+            # Если это результат Get-Member, сортируем по имени члена
+            $output = $item | Select-Object Name, MemberType, Definition | Sort-Object Name
+        } 
+        else {
+            # Если это обычный объект, превращаем свойства в строки и сортируем по алфавиту
+            $output = $item.PSObject.Properties | Select-Object @{
+                Name       = "Свойство"
+                Expression = { $_.Name }
+            }, @{
+                Name       = "Значение"
+                Expression = { $_.Value }
+            } | Sort-Object "Свойство"
+        }
+
+        # 2. Вывод в GUI
+        $title = "Просмотр: " + ($item.ToString() -split "\s+")[0]
+        $output | Out-GridView -Title $title -PassThru
+    }
+}
