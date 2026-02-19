@@ -32,5 +32,4 @@ get-service WSearch | Out-Clean
 ```powershell
 get-service WSearch | out-form
 ```
-[!TIP]
-Обе функции удобно добавить в профиль PowerShell
+>Обе функции удобно добавить в профиль PowerShell
