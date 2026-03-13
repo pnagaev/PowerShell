@@ -1,4 +1,5 @@
 #Add this code to $PROFILE if you don't want to use ISE theme.
+#Colors from MyISETheme-2026-02-24.StorableColorTheme.ps1xml
 
 $psISE.Options.ConsolePaneBackgroundColor = '#FF1E222F' 
 $psISE.Options.ConsolePaneForegroundColor = '#FF9EE196' 
